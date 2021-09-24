@@ -5,10 +5,10 @@ import org.bukkit.configuration.file.FileConfiguration;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.Map;
+import java.util.List;
 
 public final class PlayerDataInstance {
-    public Map<String, Configurable> SaveData = Map.of("PlayerJoinTracker", new PlayerJoinTracker());
+    public List<Configurable> SaveData = List.of(new PlayerJoinTracker());
 
     public String PlayerUUID;
     public File ConfigFile;
@@ -21,14 +21,14 @@ public final class PlayerDataInstance {
     }
 
     public void readData() {
-        for (Configurable config : SaveData.values())
+        for (Configurable config : SaveData)
             config.readConfig(Config);
     }
 
     public void saveData() {
         Config.set("player.uuid", PlayerUUID);
 
-        for (Configurable config : SaveData.values())
+        for (Configurable config : SaveData)
             config.saveConfig(Config);
 
         try {
@@ -40,7 +40,7 @@ public final class PlayerDataInstance {
 
     @SuppressWarnings("unchecked")
     public <T> T getRequired(Class<T> type) {
-        for (Configurable config : SaveData.values())
+        for (Configurable config : SaveData)
             if (type.isInstance(config))
                 return (T) config;
 
