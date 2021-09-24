@@ -3,7 +3,6 @@ package io.github.steviegt6.futile;
 import com.destroystokyo.paper.utils.PaperPluginLogger;
 import io.github.steviegt6.futile.backend.listeners.PluginListener;
 import io.github.steviegt6.futile.backend.listeners.playerlisteners.JoinListener;
-import io.github.steviegt6.futile.backend.singletons.Singleton;
 import io.github.steviegt6.futile.backend.savedata.PlayerDataInstance;
 import io.github.steviegt6.futile.backend.utilities.ThrowableUtils;
 import org.bukkit.configuration.InvalidConfigurationException;
@@ -19,22 +18,10 @@ import java.util.logging.Logger;
 
 @SuppressWarnings("unused")
 public final class Futile extends JavaPlugin {
-    public static Singleton<Futile> INSTANCE = new Singleton<>();
-
     // Loaded data instance cache. Preferably retrieve using getPlayerConfig.
-    public HashMap<String, PlayerDataInstance> LoadedPlayerData;
+    public HashMap<String, PlayerDataInstance> LoadedPlayerData = new HashMap<>();
 
     public List<PluginListener> Listeners = List.of(new JoinListener());
-
-    public Futile() {
-        try {
-            INSTANCE.setInstance(this);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-        LoadedPlayerData = new HashMap<>();
-    }
 
     @Override
     public void onEnable() {
@@ -84,13 +71,17 @@ public final class Futile extends JavaPlugin {
         return getPlayerConfig(playerUUID);
     }
 
-    // Save according to: dataFolder\players\playerUUIDValue.yml
+    // Save according to: dataFolder\player-data\playerUUIDValue.yml
     public String getPlayerConfigLoc(String playerUUID) {
-        return playerUUID + ".yml";
+        return File.separatorChar + "player-data" + File.separatorChar + playerUUID + ".yml";
     }
 
     @NotNull
     public Logger getLogger() {
         return PaperPluginLogger.getLogger(getDescription());
+    }
+
+    public static Futile getPlugin() {
+        return Futile.getPlugin(Futile.class);
     }
 }

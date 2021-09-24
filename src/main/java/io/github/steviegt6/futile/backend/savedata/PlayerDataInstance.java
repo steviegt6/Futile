@@ -1,10 +1,10 @@
 package io.github.steviegt6.futile.backend.savedata;
 
 import io.github.steviegt6.futile.backend.savedata.implementation.PlayerJoinTracker;
-import lombok.SneakyThrows;
 import org.bukkit.configuration.file.FileConfiguration;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.Map;
 
 public final class PlayerDataInstance {
@@ -25,21 +25,25 @@ public final class PlayerDataInstance {
             config.readConfig(Config);
     }
 
-    @SneakyThrows
     public void saveData() {
         Config.set("player.uuid", PlayerUUID);
 
         for (Configurable config : SaveData.values())
             config.saveConfig(Config);
 
-        Config.save(ConfigFile);
+        try {
+            Config.save(ConfigFile);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
-    public <T> T getRequired(Class<T> type) throws Exception {
+    @SuppressWarnings("unchecked")
+    public <T> T getRequired(Class<T> type) {
         for (Configurable config : SaveData.values())
             if (type.isInstance(config))
                 return (T) config;
 
-        throw new Exception();
+        return null;
     }
 }
