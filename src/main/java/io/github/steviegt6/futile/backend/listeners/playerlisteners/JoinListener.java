@@ -20,9 +20,9 @@ public class JoinListener extends BasicListener {
     // Typically don't wanna set to highest but this is important for handling data...
     @EventHandler(priority = EventPriority.HIGHEST)
     public void onPlayerJoin(PlayerJoinEvent evt) {
+        Futile futile = Futile.getPlugin();
         String joinUUID = evt.getPlayer().getUniqueId().toString();
-
-        PlayerDataInstance data = Futile.getPlugin().getPlayerConfig(joinUUID);
+        PlayerDataInstance data = futile.getPlayerConfig(joinUUID);
         PlayerJoinTracker tracker = data.getRequired(PlayerJoinTracker.class);
 
         data.readData();
@@ -31,16 +31,14 @@ public class JoinListener extends BasicListener {
 
         // Just gonna log this for now.
         if (playerUUID != null && !playerUUID.equals(joinUUID)) {
-            Futile.getPlugin().getLogger().warning("Mismatch between player UUIDs: " + playerUUID + " and " + joinUUID);
+            futile.getLogger().warning("Mismatch between player UUIDs: " + playerUUID + " and " + joinUUID);
         }
 
-        if (tracker != null) {
-            tracker.Joins.Value++;
-        }
+        if (tracker == null)
+            return;
 
-        if (tracker != null) {
-            Futile.getPlugin().getLogger().info("Player joined with data: Name " + evt.getPlayer().displayName() + ", UUID " + joinUUID + ", Join Count (after addition) " + tracker.Joins.Value);
-        }
+        tracker.Joins.Value++;
+        futile.getLogger().info("Player joined with data: Name " + evt.getPlayer().displayName().examinableName() + ", UUID " + joinUUID + ", Join Count (after addition) " + tracker.Joins.Value);
     }
 
     @EventHandler

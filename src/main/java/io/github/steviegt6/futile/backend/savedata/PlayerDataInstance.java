@@ -7,7 +7,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.List;
 
-public final class PlayerDataInstance {
+public class PlayerDataInstance {
     public List<Configurable> SaveData = List.of(new PlayerJoinTracker());
 
     public String PlayerUUID;

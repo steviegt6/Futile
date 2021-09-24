@@ -17,7 +17,7 @@ import java.util.List;
 import java.util.logging.Logger;
 
 @SuppressWarnings("unused")
-public final class Futile extends JavaPlugin {
+public class Futile extends JavaPlugin {
     // Loaded data instance cache. Preferably retrieve using getPlayerConfig.
     public HashMap<String, PlayerDataInstance> LoadedPlayerData = new HashMap<>();
 
