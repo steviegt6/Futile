@@ -1,18 +1,20 @@
 package io.github.steviegt6.futile.backend.savedata.implementation;
 
+import io.github.steviegt6.futile.backend.savedata.ConfigOption;
 import io.github.steviegt6.futile.backend.savedata.Configurable;
+import io.github.steviegt6.futile.backend.utilities.ConfigUtils;
 import org.bukkit.configuration.file.FileConfiguration;
 
 public class PlayerJoinTracker implements Configurable {
-    public int Joins = 0;
+    public ConfigOption<Integer> Joins = new ConfigOption<>("player.joins", 0);
 
     @Override
     public void readConfig(FileConfiguration config) {
-        Joins = (int) config.get("player.joins", 0);
+        ConfigUtils.readConfig(this, config);
     }
 
     @Override
     public void saveConfig(FileConfiguration config) {
-        config.set("player.joins", Joins);
+        ConfigUtils.saveConfig(this, config);
     }
 }

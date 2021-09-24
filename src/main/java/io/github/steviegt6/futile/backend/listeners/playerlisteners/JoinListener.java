@@ -35,11 +35,11 @@ public class JoinListener extends BasicListener {
         }
 
         if (tracker != null) {
-            tracker.Joins++;
+            tracker.Joins.Value++;
         }
 
         if (tracker != null) {
-            Futile.getPlugin().getLogger().info("Player joined with data: Name " + evt.getPlayer().displayName() + ", UUID " + joinUUID + ", Join Count (after addition) " + tracker.Joins);
+            Futile.getPlugin().getLogger().info("Player joined with data: Name " + evt.getPlayer().displayName() + ", UUID " + joinUUID + ", Join Count (after addition) " + tracker.Joins.Value);
         }
     }
 

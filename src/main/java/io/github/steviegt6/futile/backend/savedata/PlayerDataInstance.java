@@ -21,15 +21,17 @@ public final class PlayerDataInstance {
     }
 
     public void readData() {
-        for (Configurable config : SaveData)
+        for (Configurable config : SaveData) {
             config.readConfig(Config);
+        }
     }
 
     public void saveData() {
         Config.set("player.uuid", PlayerUUID);
 
-        for (Configurable config : SaveData)
+        for (Configurable config : SaveData) {
             config.saveConfig(Config);
+        }
 
         try {
             Config.save(ConfigFile);
@@ -40,9 +42,11 @@ public final class PlayerDataInstance {
 
     @SuppressWarnings("unchecked")
     public <T> T getRequired(Class<T> type) {
-        for (Configurable config : SaveData)
-            if (type.isInstance(config))
+        for (Configurable config : SaveData) {
+            if (type.isInstance(config)) {
                 return (T) config;
+            }
+        }
 
         return null;
     }
