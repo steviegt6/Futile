@@ -33,7 +33,7 @@ public final class ConfigUtils {
                     ConfigOption<?> option = (ConfigOption<?>) field.get(config);
 
                     // This handles setting new values.
-                    option.genericSet(file, option.getValue(file));
+                    option.genericSet(file, option.Value);
                 } catch (IllegalAccessException e) {
                     e.printStackTrace();
                 }
