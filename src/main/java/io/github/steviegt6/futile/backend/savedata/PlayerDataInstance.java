@@ -5,10 +5,12 @@ import org.bukkit.configuration.file.FileConfiguration;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 public class PlayerDataInstance {
-    public List<Configurable> SaveData = List.of(new PlayerJoinTracker());
+    public List<Configurable> SaveData = Collections.singletonList(new PlayerJoinTracker());
 
     public String PlayerUUID;
     public File ConfigFile;

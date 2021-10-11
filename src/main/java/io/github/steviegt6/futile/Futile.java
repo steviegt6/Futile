@@ -12,6 +12,7 @@ import org.jetbrains.annotations.NotNull;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.logging.Logger;
@@ -21,7 +22,7 @@ public class Futile extends JavaPlugin {
     // Loaded data instance cache. Preferably retrieve using getPlayerConfig.
     public HashMap<String, PlayerDataInstance> LoadedPlayerData = new HashMap<>();
 
-    public List<PluginListener> Listeners = List.of(new JoinListener());
+    public List<PluginListener> Listeners = Collections.singletonList(new JoinListener());
 
     @Override
     public void onEnable() {
