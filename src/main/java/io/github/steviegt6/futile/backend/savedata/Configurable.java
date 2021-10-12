@@ -1,9 +1,14 @@
 package io.github.steviegt6.futile.backend.savedata;
 
+import io.github.steviegt6.futile.backend.utilities.ConfigUtils;
 import org.bukkit.configuration.file.FileConfiguration;
 
 public interface Configurable {
-    void readConfig(FileConfiguration config);
+    default void readConfig(FileConfiguration config) {
+        ConfigUtils.readConfig(this, config);
+    }
 
-    void saveConfig(FileConfiguration config);
+    default void saveConfig(FileConfiguration config) {
+        ConfigUtils.saveConfig(this, config);
+    }
 }

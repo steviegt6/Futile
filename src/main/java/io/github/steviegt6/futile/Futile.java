@@ -81,8 +81,4 @@ public class Futile extends JavaPlugin {
     public Logger getLogger() {
         return PaperPluginLogger.getLogger(getDescription());
     }
-
-    public static Futile getPlugin() {
-        return Futile.getPlugin(Futile.class);
-    }
 }

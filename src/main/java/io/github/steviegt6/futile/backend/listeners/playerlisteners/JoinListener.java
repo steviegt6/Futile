@@ -11,18 +11,21 @@ import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.plugin.Plugin;
 
 public class JoinListener extends BasicListener {
+    public JoinListener(Futile plugin) {
+        super(plugin);
+    }
+
     @Override
     public void RegisterEvents(Plugin plugin) {
-        Futile.getPlugin().getLogger().info("Registering listeners in JoinListener.");
+        Plugin.getLogger().info("Registering listeners in JoinListener.");
         plugin.getServer().getPluginManager().registerEvents(this, plugin);
     }
 
     // Typically don't wanna set to highest but this is important for handling data...
     @EventHandler(priority = EventPriority.HIGHEST)
     public void onPlayerJoin(PlayerJoinEvent evt) {
-        Futile futile = Futile.getPlugin();
         String joinUUID = evt.getPlayer().getUniqueId().toString();
-        PlayerDataInstance data = futile.getPlayerConfig(joinUUID);
+        PlayerDataInstance data = Plugin.getPlayerConfig(joinUUID);
         PlayerJoinTracker tracker = data.getRequired(PlayerJoinTracker.class);
 
         data.readData();
@@ -31,18 +34,18 @@ public class JoinListener extends BasicListener {
 
         // Just gonna log this for now.
         if (playerUUID != null && !playerUUID.equals(joinUUID)) {
-            futile.getLogger().warning("Mismatch between player UUIDs: " + playerUUID + " and " + joinUUID);
+            Plugin.getLogger().warning("Mismatch between player UUIDs: " + playerUUID + " and " + joinUUID);
         }
 
         if (tracker == null)
             return;
 
         tracker.Joins.Value++;
-        futile.getLogger().info("Player joined with data: Name " + evt.getPlayer().displayName().examinableName() + ", UUID " + joinUUID + ", Join Count (after addition) " + tracker.Joins.Value);
+        Plugin.getLogger().info("Player joined with data: Name " + evt.getPlayer().displayName().examinableName() + ", UUID " + joinUUID + ", Join Count (after addition) " + tracker.Joins.Value);
     }
 
     @EventHandler
     public void onPlayerLeave(PlayerQuitEvent evt) {
-        Futile.getPlugin().getPlayerConfig(evt.getPlayer().getUniqueId().toString()).saveData();
+        Plugin.getPlayerConfig(evt.getPlayer().getUniqueId().toString()).saveData();
     }
 }

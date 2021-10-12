@@ -7,14 +7,4 @@ import org.bukkit.configuration.file.FileConfiguration;
 
 public class PlayerJoinTracker implements Configurable {
     public ConfigOption<Integer> Joins = new ConfigOption<>("player.joins", 0);
-
-    @Override
-    public void readConfig(FileConfiguration config) {
-        ConfigUtils.readConfig(this, config);
-    }
-
-    @Override
-    public void saveConfig(FileConfiguration config) {
-        ConfigUtils.saveConfig(this, config);
-    }
 }
