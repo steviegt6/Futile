@@ -1,6 +1,6 @@
 name: Futile
 version: 0.1.0
 main: io.github.steviegt6.futile.Futile
-api-version: 1.16
+api-version: 1.17
 prefix: Futile
 load: STARTUP

@@ -116,3 +116,9 @@ run/
 
 # Avoid ignoring Gradle wrapper jar file (.jar files are usually ignored)
 !gradle-wrapper.jar
+
+# PaperMC server files
+paper/*
+!paper/eula.txt
+!paper/paper-1.17.1-336.jar
+!paper/start.bat
