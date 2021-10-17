@@ -4,6 +4,7 @@ import io.github.steviegt6.futile.Futile;
 import io.github.steviegt6.futile.backend.listeners.BasicListener;
 import io.github.steviegt6.futile.backend.savedata.PlayerDataInstance;
 import io.github.steviegt6.futile.backend.savedata.implementation.PlayerJoinTracker;
+import net.kyori.adventure.text.TextComponent;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.player.PlayerJoinEvent;
@@ -41,7 +42,8 @@ public class JoinListener extends BasicListener {
             return;
 
         tracker.Joins.Value++;
-        Plugin.getLogger().info("Player joined with data: Name " + evt.getPlayer().displayName().examinableName() + ", UUID " + joinUUID + ", Join Count (after addition) " + tracker.Joins.Value);
+        TextComponent text = (TextComponent) evt.getPlayer().displayName();
+        Plugin.getLogger().info("Player joined with data: Name " + text.content() + ", UUID " + joinUUID + ", Join Count (after addition) " + tracker.Joins.Value);
     }
 
     @EventHandler

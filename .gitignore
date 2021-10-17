@@ -122,3 +122,4 @@ paper/*
 !paper/eula.txt
 !paper/paper-1.17.1-336.jar
 !paper/start.bat
+!paper/start.sh
